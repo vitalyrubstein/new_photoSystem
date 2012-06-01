@@ -37,9 +37,6 @@ function createViewHome(m, parent) {
 				divs.push($(this));
 			});
 						
-			// clearing old groups
-			//$('div.groups').remove();
-			
 			// reversing order of groups
 			divs.reverse();
 			
@@ -54,7 +51,6 @@ function createViewHome(m, parent) {
 						
 			// adding button
 			$(parent).append(createButton('change sorting', function(){m.changeGroupsSorting();}));
-			
 			// getting groups
 			var groups = m.getGroups();
 			// adding groups
@@ -62,6 +58,7 @@ function createViewHome(m, parent) {
 				$(parent).append(createGroupContainer(groups[i].getGroupId())); // adding group container
 				createViewGroup(m, "div#group-" + groups[i].getGroupId(), groups[i]); // inserting group				
 			}
+			
 		} 		
 	});
 }

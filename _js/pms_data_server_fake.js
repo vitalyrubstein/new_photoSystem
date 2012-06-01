@@ -1,3 +1,4 @@
+// WORK IN PROGRESS!!! NOT FINISHED! This is necessary for offline mode.
 function PhotoDataServerFake() {
 	
 	var groups = [];

@@ -16,15 +16,12 @@
 <script src="../_js/view_photo.js"></script>
 <script src="../_js/GUI_elements.js"></script>
 <script src="../_js/utils.js"></script>
+<script src="../_js/controller.js"></script>
+
 <script>
 jQuery(function($){
 	var m = new HomeModel();
-	
 	createViewHome(m, 'div#main');
-	
-	//var group1 = new Group(234, null);
-	//m.setGroups([new Group(234, null)]);
-	
 	var ds = new PhotoDataServer();
 	//var ds = new PhotoDataServerFake();
 	ds.getPhotos(1000,'2', function(groups, groupIds, photos, photoIds) {m.initModel(groups, groupIds, photos)});

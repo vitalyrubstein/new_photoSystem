@@ -9,7 +9,7 @@ function PhotoDataServer() {
 			dataType: 'json',
 			timeout: 30000,
 			success: function(json){ 
-				var data = parseDataFromPMS3(json); 
+				var data = parseDataFromPMS(json); 
 				var groups = data['groups']; 
 				var groupIds = data['groupIds'];
 				var photos = data['photos']; 

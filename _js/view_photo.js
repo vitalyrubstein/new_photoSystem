@@ -4,8 +4,8 @@ function createViewPhoto(m, parent, group, photo) {
 	var photoId = photo.getPhotoId();
 	
 	$(parent)
-		.append('<span>' + photo.getPhotoId() + '</span>')
-		.append(createButton('remove', function(){m.removePhoto(photoId)}))
+		.append('<span>' + photoId + '</span>')
+		.append(createButton('remove', createRemovePhotoAction(m, photoId)))
 		.append(splitButton);
 		
 		if (  group.getPhotoIndex(photoId) === 0 ){
@@ -27,7 +27,6 @@ function createSplitButton(m, parent, group, photo, title, action){
 		// actions for 'removePhoto'
 		if ( eventType === 'removePhoto' && data['groupId'] === groupId ){
 			if ( group.getPhotoIndex(photoId) === 0 ) {
-				console.log('hide');
 				$(button).hide();	
 			} else {
 				$(button).show();

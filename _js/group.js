@@ -20,8 +20,3 @@ function Group(id, photoIds) {
 	}
 	
 }
-
-
-
-
-// new commment

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>untitled</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Igor Shlahov">
+	<!-- Date: 2012-05-23 -->
+</head>
+<body>
+	<script>
+		function Model() {
+			var counter = 0;
+			var callCounter = 0;
+			var listeners = [];
+			
+			this.set = function(N) {
+				counter = N;
+				callCounter = callCounter + 1;
+				this.fireListeners();
+			}
+
+			this.get = function() {
+				return counter;
+			}
+
+			this.getCalls = function() {
+				return callCounter;
+			}
+			
+			this.fireListeners = function() {
+				for (i in listeners) {
+					listeners[i](this);
+				}
+			}
+			
+			this.registerListener = function(L) {
+				listeners.push(L);
+			}
+		}
+	
+		var m = new Model();
+	</script>
+	
+	
+	<span id="counterView"></span>
+	<script>
+		m.registerListener(function(model) {document.getElementById("counterView").innerHTML = model.get();});
+	</script>
+	
+	<button id="incrementCtrl">+</button>
+	<script>
+		document.getElementById("incrementCtrl").onclick = function() {m.set(m.get() + 1);};
+	</script>
+	
+	
+	<button id="decrementCtrl">-</button>
+	<script>
+		document.getElementById("decrementCtrl").onclick = function() {m.set(m.get() - 1);};
+	</script>
+	
+	<span id="callsView"></span>
+	<script>
+		m.registerListener(function(model) {document.getElementById("callsView").innerHTML = model.getCalls();});
+	</script>
+
+	<br>
+	<span id="textView"></span>
+	<script>
+		m.registerListener(function(model) {document.getElementById("textView").innerHTML = "Counter = " + m.get() + ", calls = " + model.getCalls();});
+	</script>
+	
+	
+	<script>
+		function createButton(parent, model, I) {
+			var el = document.createElement("button");
+			el.innerHTML = "" + I;
+			el.onclick = function() {model.set(I);};
+			model.registerListener(function(model) {el.disabled = (model.get() == I ? "disabled" : "");});
+			parent.appendChild(document.createElement("br"));
+			parent.appendChild(el);
+		}
+		createButton(document.body, m, 0);
+		createButton(document.body, m, 5);
+		createButton(document.body, m, 10);
+	</script>
+	
+	
+	
+	
+	<script>
+		m.fireListeners();
+	</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>home2</title>
+<link href="../_css/pms2.css" rel="stylesheet">
+<script src="../_js/jquery-1.7.min.js"></script>
+<script src="../_js/pms_data_server.js"></script>
+<script src="../_js/pms_data_server_fake.js"></script>
+<script src="../_js/group.js"></script>
+<script src="../_js/photo.js"></script>
+<script src="../_js/home_model.js"></script>
+<script src="../_js/json_pms_parsers.js"></script>
+<script src="../_js/view_home.js"></script>
+<script src="../_js/view_group.js"></script>
+<script src="../_js/view_photo.js"></script>
+<script src="../_js/GUI_elements.js"></script>
+<script src="../_js/utils.js"></script>
+<script>
+jQuery(function($){
+	var m = new HomeModel();
+	
+	createViewHome(m, 'div#main');
+	
+	//var group1 = new Group(234, null);
+	//m.setGroups([new Group(234, null)]);
+	
+	var ds = new PhotoDataServer();
+	//var ds = new PhotoDataServerFake();
+	ds.getPhotos(1000,'2', function(groups, groupIds, photos, photoIds) {m.initModel(groups, groupIds, photos)});
+}); //end jQuerry
+</script>
+</head>
+<body>
+	<div id='main'></div>
+</body>
+</html>
